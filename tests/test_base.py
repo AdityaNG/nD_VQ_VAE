@@ -1,5 +1,5 @@
-from project_name.base import NAME
+from nd_vq_vae.base import NAME
 
 
 def test_base():
-    assert NAME == "project_name"
+    assert NAME == "nd_vq_vae"
