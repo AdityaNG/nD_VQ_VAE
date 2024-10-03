@@ -32,7 +32,7 @@ fmt:              ## Format code using black & isort.
 
 .PHONY: lint
 lint:             ## Run pep8, black, mypy linters.
-	$(ENV_PREFIX)flake8 nd_vq_vae/
+	$(ENV_PREFIX)flake8 --per-file-ignores="nd_vq_vae/*.py:E203" nd_vq_vae/
 	$(ENV_PREFIX)black -l 79 --check nd_vq_vae/
 	$(ENV_PREFIX)black -l 79 --check tests/
 	$(ENV_PREFIX)mypy --ignore-missing-imports nd_vq_vae/
@@ -98,7 +98,7 @@ switch-to-poetry: ## Switch to poetry package manager.
 	@echo "Switching to poetry ..."
 	@if ! poetry --version > /dev/null; then echo 'poetry is required, install from https://python-poetry.org/'; exit 1; fi
 	@rm -rf .venv
-	@poetry init --no-interaction --name=a_flask_test --author=rochacbruno
+	@poetry init --no-interaction --name=a_flask_test --author=AdityaNG
 	@echo "" >> pyproject.toml
 	@echo "[tool.poetry.scripts]" >> pyproject.toml
 	@echo "nd_vq_vae = 'nd_vq_vae.__main__:main'" >> pyproject.toml
@@ -114,9 +114,3 @@ switch-to-poetry: ## Switch to poetry package manager.
 .PHONY: init
 init:             ## Initialize the project based on an application template.
 	@./.github/init.sh
-
-
-# This project has been generated from rochacbruno/python-project-template
-# __author__ = 'rochacbruno'
-# __repo__ = https://github.com/rochacbruno/python-project-template
-# __sponsor__ = https://github.com/sponsors/rochacbruno/

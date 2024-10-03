@@ -32,7 +32,7 @@ def read_requirements(path):
 setup(
     name="nd_vq_vae",
     version=read("nd_vq_vae", "VERSION"),
-    description="Awesome nd_vq_vae created by AdityaNG",
+    description="PyTorch Implementation of an N-Dimensional VQ-VAE by AdityaNG",
     url="https://github.com/AdityaNG/nD_VQ_VAE/",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
