@@ -6,7 +6,6 @@ from nd_vq_vae.utils import (
     shift_dim,
     view_range,
     tensor_slice,
-    save_video_grid,
     save_nd_tensor,
 )
 
@@ -52,14 +51,6 @@ def test_tensor_slice():
     assert torch.all(
         sliced == torch.tensor([[[13, 14], [16, 17]], [[22, 23], [25, 26]]])
     )
-
-
-@pytest.mark.parametrize("nrow", [None, 2])
-def test_save_video_grid(tmp_path, nrow):
-    video = torch.randint(0, 256, (4, 3, 10, 32, 32), dtype=torch.uint8)
-    fname = str(tmp_path / "test_video.mp4")
-    save_video_grid(video, fname, nrow=nrow)
-    assert os.path.exists(fname)
 
 
 def test_save_nd_tensor(tmp_path):

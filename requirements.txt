@@ -3,7 +3,6 @@ torchvision
 numpy
 setuptools>=65.5.0
 pytorch_lightning
-scikit-video
 av
 jsonargparse[signatures]
 einops
