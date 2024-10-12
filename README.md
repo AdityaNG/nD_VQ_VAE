@@ -30,7 +30,7 @@ Cite our work if you find it useful!
 
 ## Usage
 
-Below is an example of 
+Below is an example of encoding temporal video data. Video data is 3D since it spans height and width as well as time. Note that the channels are each treated separately and does not count as a dimension.
 ```py
 from nd_vq_vae import NDimVQVAE
 
@@ -52,13 +52,6 @@ model = NDimVQVAE(
 
 x = torch.randn(batch_size, *input_shape)
 recon_loss, x_recon, vq_output = model(x)
-```
-
-```bash
-# TODO: CLI docs
-$ python -m nd_vq_vae
-#or
-$ nd_vq_vae
 ```
 
 ### 3D: Train on Videos
