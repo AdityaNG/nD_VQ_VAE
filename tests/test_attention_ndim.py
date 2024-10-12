@@ -5,7 +5,6 @@ from nd_vq_vae.attention_ndim import (
     NDimMultiHeadAttention,
     NDimFullAttention,
     NDimAxialAttention,
-    NDimSparseAttention,
     scaled_dot_product_attention,
 )
 
@@ -90,21 +89,6 @@ def test_ndim_axial_attention(shape, batch_size, n_head):
     output = axial_attn(q, k, v, decode_step=None, decode_idx=None)
 
     assert output.shape == (batch_size, n_head, *shape, d_k)
-
-
-# @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA not available")
-# def test_ndim_sparse_attention(shape, batch_size, n_head):
-#     d_k = 32
-
-#     sparse_attn = NDimSparseAttention(shape, n_head, causal=False, num_local_blocks=2, block=16, attn_dropout=0.1)
-
-#     q = torch.randn(batch_size, n_head, *shape, d_k).cuda()
-#     k = torch.randn(batch_size, n_head, *shape, d_k).cuda()
-#     v = torch.randn(batch_size, n_head, *shape, d_k).cuda()
-
-#     output = sparse_attn(q, k, v, decode_step=None, decode_idx=None)
-
-#     assert output.shape == (batch_size, n_head, *shape, d_k)
 
 
 def test_scaled_dot_product_attention(batch_size, n_head):

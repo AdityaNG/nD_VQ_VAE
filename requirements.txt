@@ -4,7 +4,6 @@ numpy
 setuptools>=65.5.0
 pytorch_lightning
 scikit-video
-h5py
 av
 jsonargparse[signatures]
 einops

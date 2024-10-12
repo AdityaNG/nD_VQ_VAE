@@ -1,7 +1,5 @@
-from typing import Dict
 import pytest
 import torch
-import numpy as np
 from nd_vq_vae.vqvae_ndim import (
     NDimVQVAE,
     NDimAttentionResidualBlock,
@@ -14,24 +12,81 @@ from nd_vq_vae.vqvae_ndim import (
 )
 
 
-@pytest.fixture
-def args() -> Dict:
-    args = dict(
-        embedding_dim=64,
-        n_codes=512,
-        n_hiddens=128,
-        n_res_layers=2,
-        downsample=[8, 8, 8],
-        codebook_beta=0.25,
-        n_dims=3,
-        input_shape=[32, 32, 32],
-    )
-    return args
+import pytest
+
+
+@pytest.fixture(params=[1, 2, 3])
+def n_dims(request):
+    return request.param
+
+
+@pytest.fixture(params=[32])
+def input_size(request):
+    return request.param
+
+
+@pytest.fixture(params=[128])
+def embedding_dim(request):
+    return request.param
+
+
+@pytest.fixture(params=[256])
+def n_codes(request):
+    return request.param
+
+
+@pytest.fixture(params=[128])
+def n_hiddens(request):
+    return request.param
+
+
+@pytest.fixture(params=[2, 3])
+def n_res_layers(request):
+    return request.param
+
+
+@pytest.fixture(params=[4, 8])
+def downsample(request):
+    return request.param
+
+
+@pytest.fixture(params=[0.25])
+def codebook_beta(request):
+    return request.param
+
+
+@pytest.fixture(
+    params=[
+        1,
+        4,
+    ]
+)
+def batch_size(request):
+    return request.param
 
 
 @pytest.fixture
-def batch_size():
-    return 4
+def args(
+    n_dims,
+    input_size,
+    embedding_dim,
+    n_codes,
+    n_hiddens,
+    n_res_layers,
+    downsample,
+    codebook_beta,
+):
+    input_shape = [input_size] * n_dims
+    return {
+        "embedding_dim": embedding_dim,
+        "n_codes": n_codes,
+        "n_hiddens": n_hiddens,
+        "n_res_layers": n_res_layers,
+        "downsample": [downsample] * n_dims,
+        "codebook_beta": codebook_beta,
+        "n_dims": n_dims,
+        "input_shape": input_shape,
+    }
 
 
 def test_ndim_vqvae(args, batch_size):
@@ -67,7 +122,7 @@ def test_codebook(args, batch_size):
     z = torch.randn(
         batch_size,
         args["embedding_dim"],
-        *[s // 8 for s in args["input_shape"]]
+        *[s // 8 for s in args["input_shape"]],
     )
     output = codebook(z)
 
@@ -104,7 +159,7 @@ def test_ndim_decoder(args, batch_size):
     x = torch.randn(
         batch_size,
         args["n_hiddens"],
-        *[s // d for s, d in zip(args["input_shape"], args["downsample"])]
+        *[s // d for s, d in zip(args["input_shape"], args["downsample"])],
     )
     output = decoder(x)
 
@@ -180,3 +235,23 @@ def test_vqvae_configure_optimizers(args):
     optimizer = model.configure_optimizers()
 
     assert isinstance(optimizer, torch.optim.Optimizer)
+
+
+def test_vqvae_backpropagation(args, batch_size):
+    model = NDimVQVAE(**args)
+    x = torch.randn(batch_size, 3, *args["input_shape"], requires_grad=True)
+
+    recon_loss, x_recon, vq_output = model(x)
+
+    # Compute a dummy loss
+    loss = recon_loss + vq_output["commitment_loss"]
+
+    # Perform backpropagation
+    loss.backward()
+
+    # Check if gradients are computed for all parameters
+    for name, param in model.named_parameters():
+        assert param.grad is not None, f"No gradient for {name}"
+
+    # Check if input gradients are computed
+    assert x.grad is not None, "No gradient for input"
