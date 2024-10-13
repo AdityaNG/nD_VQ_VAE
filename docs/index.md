@@ -1,4 +1,4 @@
-# nd_vq_vae
+# Documentation: `NDimVQVAE`
 
 [![codecov](https://codecov.io/gh/AdityaNG/nD_VQ_VAE/branch/main/graph/badge.svg?token=nD_VQ_VAE_token_here)](https://codecov.io/gh/AdityaNG/nD_VQ_VAE)
 [![CI](https://github.com/AdityaNG/nD_VQ_VAE/actions/workflows/main.yml/badge.svg)](https://github.com/AdityaNG/nD_VQ_VAE/actions/workflows/main.yml)
