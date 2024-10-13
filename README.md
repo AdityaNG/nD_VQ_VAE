@@ -1,7 +1,11 @@
 # `NDimVQVAE`
 
+![PyPI - Downloads](https://img.shields.io/pypi/dm/nD_VQ_VAE)
+[![PyPI - Version](https://img.shields.io/pypi/v/nD_VQ_VAE)](https://pypi.org/project/nD_VQ_VAE/)
 [![codecov](https://codecov.io/gh/AdityaNG/nD_VQ_VAE/branch/main/graph/badge.svg?token=nD_VQ_VAE_token_here)](https://codecov.io/gh/AdityaNG/nD_VQ_VAE)
 [![CI](https://github.com/AdityaNG/nD_VQ_VAE/actions/workflows/main.yml/badge.svg)](https://github.com/AdityaNG/nD_VQ_VAE/actions/workflows/main.yml)
+[![GitHub License](https://img.shields.io/github/license/AdityaNG/nD_VQ_VAE)](https://github.com/AdityaNG/nD_VQ_VAE/blob/main/LICENSE)
+
 
 PyTorch Implementation of the N-Dimensional VQ-VAE by AdityaNG.
 
