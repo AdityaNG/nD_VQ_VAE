@@ -27,6 +27,8 @@ class NDimVQVAE(pl.LightningModule):
         codebook_beta: int,
         input_shape: List[int],
     ):
+        assert 0 <= n_dims <= 3, f"n_dims must be in (1, 2, 3), got: {n_dims}"
+
         super().__init__()
         self.embedding_dim = embedding_dim
         self.n_codes = n_codes

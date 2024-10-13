@@ -255,3 +255,13 @@ def test_vqvae_backpropagation(args, batch_size):
 
     # Check if input gradients are computed
     assert x.grad is not None, "No gradient for input"
+
+
+def test_vqvae_out_of_bounds(args):
+    args["n_dims"] = 4
+    with pytest.raises(AssertionError):
+        NDimVQVAE(**args)
+
+    args["n_dims"] = 0
+    with pytest.raises(AssertionError):
+        NDimVQVAE(**args)
