@@ -5,7 +5,6 @@ import os
 from nd_vq_vae.utils import (
     shift_dim,
     view_range,
-    tensor_slice,
     save_nd_tensor,
 )
 
@@ -42,15 +41,6 @@ def test_view_range(sample_tensor):
     # Reshape back to original
     original = view_range(reshaped, 2, 4, original_shape[2:4])
     assert torch.all(original == sample_tensor)
-
-
-def test_tensor_slice():
-    x = torch.arange(27).reshape(3, 3, 3)
-    sliced = tensor_slice(x, begin=(1, 1, 1), size=(2, -1, 2))
-    assert sliced.shape == (2, 2, 2)
-    assert torch.all(
-        sliced == torch.tensor([[[13, 14], [16, 17]], [[22, 23], [25, 26]]])
-    )
 
 
 def test_save_nd_tensor(tmp_path):

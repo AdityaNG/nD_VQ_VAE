@@ -54,15 +54,6 @@ def view_range(x, i, j, shape):
     return x.view(target_shape)
 
 
-def tensor_slice(x, begin, size):
-    assert all([b >= 0 for b in begin])
-    size = [l - b if s == -1 else s for s, b, l in zip(size, begin, x.shape)]
-    assert all([s >= 0 for s in size])
-
-    slices = [slice(b, b + s) for b, s in zip(begin, size)]
-    return x[slices]
-
-
 def save_nd_tensor(sample: torch.Tensor, output_file: str):
     # Ensure the tensor is detached from the computation graph and on CPU
     sample = sample.detach().cpu()

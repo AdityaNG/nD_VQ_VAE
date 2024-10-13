@@ -11,3 +11,5 @@ mkdocs
 lark
 types-requests
 requests-mock
+setuptools>=65.5.0
+av
