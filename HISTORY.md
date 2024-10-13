@@ -4,6 +4,14 @@ Changelog
 
 (unreleased)
 ------------
+- Update LICENSE. [Aditya]
+- Docs(README.md): stickers. [Aditya NG]
+- Docs(README.md): landing. [Aditya NG]
+
+
+1.0.0 (2024-10-13)
+------------------
+- Release: version 1.0.0 🚀 [Aditya NG]
 - Docs(docs/index.md): contribution link. [Aditya NG]
 - Docs(docs/hyperparameter_tuning.md): list items simplified. [Aditya
   NG]
