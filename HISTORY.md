@@ -4,6 +4,13 @@ Changelog
 
 (unreleased)
 ------------
+- Fix(nd_vq_vae/): pruned. [Aditya NG]
+- Feat(nd_vq_vae/vqvae_ndim.py): clear warning message. [Aditya NG]
+
+
+1.0.1 (2024-10-13)
+------------------
+- Release: version 1.0.1 🚀 [Aditya NG]
 - Update LICENSE. [Aditya]
 - Docs(README.md): stickers. [Aditya NG]
 - Docs(README.md): landing. [Aditya NG]
