@@ -10,7 +10,7 @@ Codebook size and embedding dimension (n_codes and embedding_dim), model capacit
 
 ### Monitor Key Metrics
 
-During training and validation, it's crucial to track reconstruction loss, commitment loss, and perplexity.
+During training and validation, it's crucial to track reconstruction loss, commitment loss, and perplexity. Note that the reconstruction loss are in the same units as the input data. Say the input data is in meters, that means that the reconstruction loss will also be in meters!
 
 ### Analyze Loss Curves
 

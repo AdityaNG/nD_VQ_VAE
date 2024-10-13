@@ -1,9 +1,17 @@
-# nd_vq_vae
+# `NDimVQVAE`
 
 [![codecov](https://codecov.io/gh/AdityaNG/nD_VQ_VAE/branch/main/graph/badge.svg?token=nD_VQ_VAE_token_here)](https://codecov.io/gh/AdityaNG/nD_VQ_VAE)
 [![CI](https://github.com/AdityaNG/nD_VQ_VAE/actions/workflows/main.yml/badge.svg)](https://github.com/AdityaNG/nD_VQ_VAE/actions/workflows/main.yml)
 
-PyTorch Implementation of the N-Dimensional VQ-VAE by AdityaNG
+PyTorch Implementation of the N-Dimensional VQ-VAE by AdityaNG.
+
+VQ-VAE is a powerful technique for learning discrete representations of high-dimensional data. `NDimVQVAE` extends this concept to support N-dimensional data, making it ideal for building foundation models that process various types of sensor data.
+
+Everyone is looking to build their own foundation model! Multimodal foundation models require us to condense high-dimensional sensor data into a low-dimensional quantized space. That's where `NDimVQVAE` comes in!
+
+`NDimVQVAE` provides support to encode 1D, 2D, 3D (and 4D data if you include channels)!
+
+If you want to build a foundation model that processes video data, point cloud data or signals from a Tokamak or Stellarator for magnetic confinement, this is your one-stop shop to build an Encoder-Decoder pair!
 
 <img src="media/nd_vq_vae_arch.png" alt="Architecture" style="max-height: 50%;">
 
@@ -16,6 +24,7 @@ pip install nd_vq_vae
 
 ## Cite
 
+D³Nav pilot studies made use of VQ-VAE encoders to feed in video data (3D), image data (2D) and trajectory data (1D) into our transformer model. We make our `NDimVQVAE` source code public.
 Cite our work if you find it useful!
 
 ```bibtex
@@ -102,12 +111,13 @@ The VQ-VAE has the following hyperparameters
 7. Attention mechanism (n_head, attn_dropout)
 8. Codebook update strategy (ema_decay)
 
-Below is how you would tune these parameters based on the `recon_loss` and `commitment_loss` curves.
+Below is how you would tune these parameters based on the `recon_loss` and `commitment_loss` curves. 
 1. Monitor Key Metrics
 - Track these metrics during training and validation:
     - Reconstruction Loss
     - Commitment Loss
     - Perplexity
+    - Note that the reconstruction loss are in the same units as the input data. Say the input data is in meters, that means that the reconstruction loss will also be in meters!
 2. Analyze Loss Curves
 - Reconstruction Loss
     - High and not decreasing: Increase model capacity (n_hiddens, n_res_layers) or adjust learning rate.

@@ -5,7 +5,7 @@
 
 PyTorch Implementation of the N-Dimensional VQ-VAE by AdityaNG
 
-<img src="media/nd_vq_vae_arch.png" alt="Architecture" style="max-height: 50%;">
+<img src="https://github.com/AdityaNG/nD_VQ_VAE/raw/main/media/nd_vq_vae_arch.png" alt="Architecture" style="max-height: 50%;">
 
 
 ## Install it from PyPI
