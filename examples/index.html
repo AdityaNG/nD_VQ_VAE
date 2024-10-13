@@ -46,6 +46,8 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Usage</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use-ndimvqvae">How to use NDimVQVAE</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#3d-train-on-videos">3D: Train on Videos</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#2d-train-on-images">2D: Train on Images</a>
@@ -60,7 +62,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../install/">Install it from PyPI</a>
+                <li class="toctree-l1"><a class="reference internal" href="../install/">Install</a>
                 </li>
               </ul>
       </div>
@@ -87,6 +89,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="usage">Usage</h1>
+<h2 id="how-to-use-ndimvqvae">How to use <code>NDimVQVAE</code></h2>
 <p>Below is an example of encoding temporal video data. Video data is 3D since it spans height and width as well as time. Note that the channels are each treated separately and does not count as a dimension.</p>
 <pre><code class="language-py">from nd_vq_vae import NDimVQVAE
 
