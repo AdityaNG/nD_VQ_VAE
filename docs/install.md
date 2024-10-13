@@ -1,10 +1,12 @@
-# Install it from PyPI
+# Install
+
+## PyPI
 
 ```bash
 pip install nd_vq_vae
 ```
 
-# Development Environment
+## Development Environment
 
 Clone the repo
 

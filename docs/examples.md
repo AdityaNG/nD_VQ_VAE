@@ -1,5 +1,7 @@
 # Usage
 
+## How to use `NDimVQVAE`
+
 Below is an example of encoding temporal video data. Video data is 3D since it spans height and width as well as time. Note that the channels are each treated separately and does not count as a dimension.
 ```py
 from nd_vq_vae import NDimVQVAE
