@@ -40,7 +40,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">Documentation: NDimVQVAE</a>
+                <li class="toctree-l1"><a class="reference internal" href="..">NDimVQVAE Docs</a>
                 </li>
               </ul>
               <ul>
@@ -118,7 +118,7 @@
 <p>Codebook size and embedding dimension (n_codes and embedding_dim), model capacity (n_hiddens and n_res_layers), downsampling strategy (downsample), loss balancing (codebook_beta and recon_loss_factor), optimization parameters (learning_rate, beta1, beta2), training parameters (batch_size, num_epochs), attention mechanism (n_head, attn_dropout), and codebook update strategy (ema_decay).</p>
 <h2 id="tuning-process">Tuning Process</h2>
 <h3 id="monitor-key-metrics">Monitor Key Metrics</h3>
-<p>During training and validation, it's crucial to track reconstruction loss, commitment loss, and perplexity.</p>
+<p>During training and validation, it's crucial to track reconstruction loss, commitment loss, and perplexity. Note that the reconstruction loss are in the same units as the input data. Say the input data is in meters, that means that the reconstruction loss will also be in meters!</p>
 <h3 id="analyze-loss-curves">Analyze Loss Curves</h3>
 <h4 id="reconstruction-loss">Reconstruction Loss</h4>
 <p>If the reconstruction loss is high and not decreasing, consider increasing model capacity (n_hiddens, n_res_layers) or adjusting the learning rate. When the training loss is decreasing but validation loss remains stable, it may indicate potential overfitting. In this case, reduce capacity or add regularization. If both training and validation losses are decreasing, but validation loss is much higher, try increasing batch_size or using data augmentation.</p>
