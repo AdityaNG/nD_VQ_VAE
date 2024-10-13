@@ -40,7 +40,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">nd_vq_vae</a>
+                <li class="toctree-l1"><a class="reference internal" href="..">Documentation: NDimVQVAE</a>
                 </li>
               </ul>
               <ul>
@@ -50,6 +50,38 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Hyperparameters: How to tune my VQ-VAE?</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#hyperparameters-overview">Hyperparameters Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tuning-process">Tuning Process</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#monitor-key-metrics">Monitor Key Metrics</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#analyze-loss-curves">Analyze Loss Curves</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#reconstruction-loss">Reconstruction Loss</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#commitment-loss">Commitment Loss</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#balance-losses">Balance Losses</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optimize-codebook-usage">Optimize Codebook Usage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fine-tune-learning-dynamics">Fine-tune Learning Dynamics</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#address-overfitting">Address Overfitting</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attention-mechanism">Attention Mechanism</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#codebook-update-strategy">Codebook Update Strategy</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#downsampling-strategy">Downsampling Strategy</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -81,54 +113,33 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="hyperparameters-how-to-tune-my-vq-vae">Hyperparameters: How to tune my VQ-VAE?</h1>
-<p>The VQ-VAE has the following hyperparameters
-1. Codebook size and embedding dimension (n_codes and embedding_dim)
-2. Model capacity (n_hiddens and n_res_layers)
-3. Downsampling strategy (downsample)
-4. Loss balancing (codebook_beta and recon_loss_factor)
-5. Optimization parameters (learning_rate, beta1, beta2)
-6. Training parameters (batch_size, num_epochs)
-7. Attention mechanism (n_head, attn_dropout)
-8. Codebook update strategy (ema_decay)</p>
-<p>Below is how you would tune these parameters based on the <code>recon_loss</code> and <code>commitment_loss</code> curves.
-1. Monitor Key Metrics
-- Track these metrics during training and validation:
-    - Reconstruction Loss
-    - Commitment Loss
-    - Perplexity
-2. Analyze Loss Curves
-- Reconstruction Loss
-    - High and not decreasing: Increase model capacity (n_hiddens, n_res_layers) or adjust learning rate.
-    - Train decreasing, val stable: Potential overfitting. Reduce capacity or add regularization.
-    - Both decreasing, val much higher: Increase batch_size or use data augmentation.
-- Commitment Loss
-    - Too high: Decrease codebook_beta.
-    - Too low or unstable: Increase codebook_beta.
-3. Balance Losses
-- Adjust codebook_beta and recon_loss_factor to achieve a good balance between reconstruction and commitment losses.
-4. Optimize Codebook Usage
-- Monitor perplexity:
-    - Low perplexity: Increase n_codes or decrease embedding_dim.
-    - High perplexity: Decrease n_codes or increase embedding_dim.
-5. Fine-tune Learning Dynamics
-- Slow convergence: Increase learning_rate or adjust optimizer parameters.
-- Unstable training: Decrease learning_rate or increase batch_size.
-6. Address Overfitting
-- If validation loss plateaus while training loss decreases:
-    - Introduce dropout in encoder/decoder
-    - Reduce model capacity
-    - Increase batch_size or use data augmentation
-7. Attention Mechanism
-- Adjust n_head and attn_dropout in attention blocks for better long-range dependencies.
-8. Codebook Update Strategy
-- Fine-tune ema_decay for codebook stability and adaptation speed.
-9. Downsampling Strategy
-- Adjust downsample factors based on computational resources and required detail level.</p>
-<p>Best Practices
-- Make incremental changes to hyperparameters.
-- Perform ablation studies, changing one parameter at a time.
-- Consider using learning rate scheduling or cyclical learning rates.
-- Regularly save checkpoints and log experiments for comparison.</p>
+<h2 id="hyperparameters-overview">Hyperparameters Overview</h2>
+<p>The VQ-VAE has several key hyperparameters:</p>
+<p>Codebook size and embedding dimension (n_codes and embedding_dim), model capacity (n_hiddens and n_res_layers), downsampling strategy (downsample), loss balancing (codebook_beta and recon_loss_factor), optimization parameters (learning_rate, beta1, beta2), training parameters (batch_size, num_epochs), attention mechanism (n_head, attn_dropout), and codebook update strategy (ema_decay).</p>
+<h2 id="tuning-process">Tuning Process</h2>
+<h3 id="monitor-key-metrics">Monitor Key Metrics</h3>
+<p>During training and validation, it's crucial to track reconstruction loss, commitment loss, and perplexity.</p>
+<h3 id="analyze-loss-curves">Analyze Loss Curves</h3>
+<h4 id="reconstruction-loss">Reconstruction Loss</h4>
+<p>If the reconstruction loss is high and not decreasing, consider increasing model capacity (n_hiddens, n_res_layers) or adjusting the learning rate. When the training loss is decreasing but validation loss remains stable, it may indicate potential overfitting. In this case, reduce capacity or add regularization. If both training and validation losses are decreasing, but validation loss is much higher, try increasing batch_size or using data augmentation.</p>
+<h4 id="commitment-loss">Commitment Loss</h4>
+<p>For high commitment loss, decrease codebook_beta. If it's too low or unstable, increase codebook_beta.</p>
+<h3 id="balance-losses">Balance Losses</h3>
+<p>Adjust codebook_beta and recon_loss_factor to achieve a good balance between reconstruction and commitment losses.</p>
+<h3 id="optimize-codebook-usage">Optimize Codebook Usage</h3>
+<p>Monitor perplexity closely. Low perplexity suggests increasing n_codes or decreasing embedding_dim, while high perplexity indicates the need to decrease n_codes or increase embedding_dim.</p>
+<h3 id="fine-tune-learning-dynamics">Fine-tune Learning Dynamics</h3>
+<p>For slow convergence, increase learning_rate or adjust optimizer parameters. If training is unstable, decrease learning_rate or increase batch_size.</p>
+<h3 id="address-overfitting">Address Overfitting</h3>
+<p>When validation loss plateaus while training loss decreases, consider introducing dropout in encoder/decoder, reducing model capacity, or increasing batch_size / using data augmentation.</p>
+<h3 id="attention-mechanism">Attention Mechanism</h3>
+<p>Adjust n_head and attn_dropout in attention blocks to improve long-range dependencies.</p>
+<h3 id="codebook-update-strategy">Codebook Update Strategy</h3>
+<p>Fine-tune ema_decay for optimal codebook stability and adaptation speed.</p>
+<h3 id="downsampling-strategy">Downsampling Strategy</h3>
+<p>Adjust downsample factors based on available computational resources and required detail level.</p>
+<h2 id="best-practices">Best Practices</h2>
+<p>Make incremental changes to hyperparameters and perform ablation studies, changing one parameter at a time. Consider using learning rate scheduling or cyclical learning rates. Regularly save checkpoints and log experiments for comparison.</p>
               
             </div>
           </div><footer>
