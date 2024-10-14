@@ -4,6 +4,12 @@ Changelog
 
 (unreleased)
 ------------
+- Docs(media/vq_vae_arch_anim.gif): arch. [Aditya NG]
+
+
+1.0.2 (2024-10-13)
+------------------
+- Release: version 1.0.2 🚀 [Aditya NG]
 - Fix(nd_vq_vae/): pruned. [Aditya NG]
 - Feat(nd_vq_vae/vqvae_ndim.py): clear warning message. [Aditya NG]
 
