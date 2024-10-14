@@ -9,6 +9,9 @@
 
 PyTorch Implementation of the N-Dimensional VQ-VAE by AdityaNG.
 
+<img src="https://github.com/AdityaNG/nD_VQ_VAE/raw/main/media/vq_vae_arch_anim.gif" alt="Architecture" style="max-height: 50%;">
+
+
 VQ-VAE is a powerful technique for learning discrete representations of high-dimensional data. `NDimVQVAE` extends this concept to support N-dimensional data, making it ideal for building foundation models that process various types of sensor data.
 
 Everyone is looking to build their own foundation model! Multimodal foundation models require us to condense high-dimensional sensor data into a low-dimensional quantized space. That's where `NDimVQVAE` comes in!
@@ -16,8 +19,6 @@ Everyone is looking to build their own foundation model! Multimodal foundation m
 `NDimVQVAE` provides support to encode 1D, 2D, 3D (and 4D data if you include channels)!
 
 If you want to build a foundation model that processes video data, point cloud data or signals from a Tokamak or Stellarator for magnetic confinement, this is your one-stop shop to build an Encoder-Decoder pair!
-
-<img src="media/nd_vq_vae_arch.png" alt="Architecture" style="max-height: 50%;">
 
 
 ## Install it from PyPI
@@ -156,6 +157,10 @@ Best Practices
 - Perform ablation studies, changing one parameter at a time.
 - Consider using learning rate scheduling or cyclical learning rates.
 - Regularly save checkpoints and log experiments for comparison.
+
+## Architecture
+
+<img src="https://github.com/AdityaNG/nD_VQ_VAE/raw/main/media/nd_vq_vae_arch.png" alt="Architecture" style="max-height: 50%;">
 
 ## Development
 
